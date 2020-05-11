@@ -13,12 +13,17 @@ jupyter:
 ---
 
 ```{python}
+# %autosave 0
+```
+
+```{python}
 import nltk
 from nltk import sent_tokenize, RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 from docx import Document
 import pandas as pd
+from wordcloud import WordCloud
 ```
 
 ```{python}
@@ -84,40 +89,36 @@ for weight in sentence_weight['weight']:
 ```
 
 ```{python}
-sentence_weight.sort_values(by=['weight'],ascending=False).head(n=10)
+print(sentence_weight.sort_values(by=['weight'],ascending=False))
 ```
 
 ```{python}
+words = ''
 
-
-```
-
-```{python}
-
-```
-
-```{python}
-wlem = WordNetLemmatizer()
-
-for words in word_list:
-    for word in words:
-        word = wlem.lemmatize(word)
-
-#words = " ".join(without_stopwords)
-
-#wordcloud = WordCloud(width = 1200, height = 1200, 
-                #background_color ='white', 
-              #stopwords = stopwords, 
-               # min_font_size = 5).generate(words)
+for word in frequency_table:
+        words += "".join(str(word))+ " "
+        
+wordcloud = WordCloud(width = 1200, height = 1200, 
+                background_color ='white', 
+                stopwords = stopwords, 
+                min_font_size = 5).generate(words)
   
-    # plot the WordCloud image                        
-#plt.figure(figsize = (20, 15), facecolor = None) 
-#plt.imshow(wordcloud) 
-#plt.axis("off") 
-#plt.tight_layout(pad = 0) 
+# plot the WordCloud image                        
+plt.figure(figsize = (20, 15), facecolor = None) 
+plt.imshow(wordcloud) 
+plt.axis("off") 
+plt.tight_layout(pad = 0) 
   
 plt.show()
         
+```
+
+```{python}
+
+```
+
+```{python}
+
 ```
 
 ```{python}
